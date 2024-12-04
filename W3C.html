@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Accessible Interactive Photo Gallery</title>
+    <style>
+        .gallery {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .figure {
+            text-align: center;
+            max-width: 300px;
+        }
+        .figure img {
+            max-width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .figure img:hover,
+        .figure img:focus {
+            transform: scale(1.1);
+        }
+        .figure figcaption {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery">
+        <figure class="figure">
+            <img src="https://placehold.co/400" alt="Sunset over mountains" id="img1">
+            <figcaption>Serene Mountain Sunset</figcaption>
+        </figure>
+        <figure class="figure">
+            <img src="https://placehold.co/400" alt="Ocean waves crashing" id="img2">
+            <figcaption>Powerful Ocean Waves</figcaption>
+        </figure>
+        <figure class="figure">
+            <img src="https://placehold.co/400" alt="Lush green forest" id="img3">
+            <figcaption>Dense Tropical Forest</figcaption>
+        </figure>
+        <figure class="figure">
+            <img src="https://placehold.co/400" alt="Desert landscape" id="img4">
+            <figcaption>Vast Desert Landscape</figcaption>
+        </figure>
+        <figure class="figure">
+            <img src="https://placehold.co/400" alt="City skyline at night" id="img5">
+            <figcaption>Glittering City Lights</figcaption>
+        </figure>
+        <figure class="figure">
+            <img src="https://placehold.co/400" alt="Snow-covered mountain peak" id="img6">
+            <figcaption>Majestic Snow Peak</figcaption>
+        </figure>
+    </div>
+
+    <script>
+        // Function to add tabindex to images
+        function addTabIndex() {
+            console.log("Page loaded. Adding tabindex to images.");
+            const images = document.querySelectorAll('.figure img');
+            images.forEach((img, index) => {
+                img.tabIndex = index + 1;
+                console.log(`Added tabindex ${index + 1} to image`);
+            });
+        }
+
+        // Event listeners for mouse and focus events
+        const figures = document.querySelectorAll('.figure');
+        figures.forEach(figure => {
+            const img = figure.querySelector('img');
+            
+            // Mouse events
+            img.addEventListener('mouseover', () => {
+                console.log(`Mouse over ${img.alt}`);
+            });
+            
+            img.addEventListener('mouseleave', () => {
+                console.log(`Mouse left ${img.alt}`);
+            });
+            
+            // Focus events
+            img.addEventListener('focus', () => {
+                console.log(`Focused on ${img.alt}`);
+                img.style.transform = 'scale(1.1)';
+            });
+            
+            img.addEventListener('blur', () => {
+                console.log(`Blurred from ${img.alt}`);
+                img.style.transform = 'scale(1)';
+            });
+        });
+
+        // Add event listener for page load
+        window.addEventListener('load', addTabIndex);
+    </script>
+</body>
+</html>
